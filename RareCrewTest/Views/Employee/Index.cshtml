@@ -1,0 +1,44 @@
+﻿@model IEnumerable<RareCrewTest.Models.EmployeeSummary>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+</style>
+    <title>Employees</title>
+    <link rel="stylesheet" type="text/css" href="~/css/site.css">
+</head>
+<body>
+    <h1>Employees</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Total Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var summary in Model)
+            {
+                <tr style="@(summary.TotalHours < 100 ? "background-color: #e94f58;" : "")">
+                    <td>@summary.EmployeeName</td>
+                    <td>@summary.TotalHours</td>
+                </tr>
+            }
+            <!-- It has been taken into account that "null" values for names are treated as "Unknown". Additionally, where the start date is greater than the end date, resulting in negative time, is counted as 0 hours.-->
+            <!-- Feedback: While debugging, I noticed that the start date in the API is labeled as "Star" instead of "Start." This could cause confusion and take up unnecessary time for future candidates as they try to identify the issue while solving the problem. It might be beneficial to correct this in the API to avoid potential delays. -->
+        </tbody>
+    </table>
+</body>
+</html>
