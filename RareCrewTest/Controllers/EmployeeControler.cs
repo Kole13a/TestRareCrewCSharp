@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RareCrewTest.Models;
 using RareCrewTest.Services;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace RareCrewTest.Controllers
 {
@@ -17,12 +16,16 @@ namespace RareCrewTest.Controllers
 
         public async Task<IActionResult> Index()
         {
-
             var employees = await _employeeService.GetEmployeesAsync();
-
             var employeeSummaries = EmployeeTimeCalculator.GetEmployeeSummaries(employees);
-
             return View(employeeSummaries);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GenerateChart()
+        {
+            await _employeeService.GenerateEmployeeWorkDistributionChartAsync();
+            return RedirectToAction("Index");
         }
     }
 }

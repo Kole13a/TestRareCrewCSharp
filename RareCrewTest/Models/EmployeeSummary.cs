@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 namespace RareCrewTest.Models
 {
     public class EmployeeSummary
@@ -24,5 +21,4 @@ namespace RareCrewTest.Models
                 .ToList();
         }
     }
-
 }
